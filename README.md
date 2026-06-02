@@ -4,4 +4,4 @@ Project page materials for:
 
 > Chuanzhi Xu, Haoxian Zhou, Langyi Chen, Haodong Chen, Zeke Zexi Hu, Zhicheng Lu, Ying Zhou, Vera Chung, Qiang Qu, and Weidong Cai. A survey of 3d reconstruction with event cameras. arXiv preprint arXiv:2505.08438, 2025.
 
-The GitHub Pages site is in [`docs/`](docs/). To publish it, set GitHub Pages to deploy from the `main` branch and the `/docs` folder.
+The GitHub Pages site is in [`docs/`](docs/).
