@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>A Survey of 3D Reconstruction with Event Cameras</title>
+    <meta
+      name="description"
+      content="Project page for A Survey of 3D Reconstruction with Event Cameras, covering stereo, monocular, and multimodal event-based 3D reconstruction."
+    >
+    <meta property="og:title" content="A Survey of 3D Reconstruction with Event Cameras">
+    <meta property="og:description" content="A structured survey of event-camera-based 3D reconstruction methods, datasets, metrics, and future directions.">
+    <meta property="og:image" content="assets/figures/roadmap.png">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top">Event3DSurvey</a>
+      <nav aria-label="Primary navigation">
+        <a href="#overview">Overview</a>
+        <a href="#taxonomy">Taxonomy</a>
+        <a href="#methods">Methods</a>
+        <a href="#datasets">Datasets</a>
+        <a href="#gaps">Future</a>
+        <a href="#cite">Cite</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Review article / arXiv:2505.08438</p>
+          <h1>A Survey of 3D Reconstruction with Event Cameras</h1>
+          <p class="authors">
+            Chuanzhi Xu, Haoxian Zhou, Langyi Chen, Haodong Chen, Zeke Zexi Hu,
+            Zhicheng Lu, Ying Zhou, Vera Chung, Qiang Qu, and Weidong Cai
+          </p>
+          <p class="hero-summary">
+            A comprehensive review of event-driven 3D reconstruction, organized by
+            sensing setup, reconstruction strategy, output representation, datasets,
+            evaluation metrics, and open research challenges.
+          </p>
+          <div class="hero-actions" aria-label="Paper links">
+            <a class="button primary" href="assets/paper/survey.pdf">PDF</a>
+            <a class="button" href="https://arxiv.org/abs/2505.08438">arXiv</a>
+            <a class="button" href="#cite">BibTeX</a>
+          </div>
+        </div>
+        <figure class="hero-figure">
+          <img src="assets/figures/roadmap.png" alt="Roadmap of 3D reconstruction with event cameras">
+          <figcaption>Roadmap from event-based geometry to neural 3D rendering.</figcaption>
+        </figure>
+      </section>
+
+      <section id="overview" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Why this survey</p>
+          <h2>Event cameras are changing the reconstruction pipeline</h2>
+          <p>
+            Event cameras asynchronously report per-pixel brightness changes instead
+            of recording full frames at fixed rates. Their microsecond temporal
+            resolution, high dynamic range, low latency, and low redundancy make them
+            well suited to high-speed motion, difficult lighting, and low-power
+            robotics or AR/VR systems.
+          </p>
+        </div>
+
+        <div class="stats-grid">
+          <article>
+            <span class="stat">3</span>
+            <h3>Input setups</h3>
+            <p>Stereo, monocular, and multimodal event-camera systems.</p>
+          </article>
+          <article>
+            <span class="stat">4</span>
+            <h3>Output families</h3>
+            <p>Depth maps, point clouds, voxels or meshes, NeRFs, and 3DGS.</p>
+          </article>
+          <article>
+            <span class="stat">70+</span>
+            <h3>Methods organized</h3>
+            <p>Chronological comparison across geometry, learning, NeRF, and 3DGS.</p>
+          </article>
+          <article>
+            <span class="stat">12</span>
+            <h3>Public datasets</h3>
+            <p>Real, synthetic, navigation, object, human, and photometric datasets.</p>
+          </article>
+        </div>
+
+        <div class="wide-figure-grid">
+          <figure>
+            <img src="assets/figures/cumulative_publications.png" alt="Publication trends by category">
+            <figcaption>Publication trends by category through May 2025.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/figures/timeline.png" alt="Publication timeline by category">
+            <figcaption>Timeline of event-based 3D reconstruction categories.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section id="taxonomy" class="section band">
+        <div class="section-heading">
+          <p class="eyebrow">Survey architecture</p>
+          <h2>A taxonomy built around sensing, processing, and representation</h2>
+          <p>
+            The paper separates event-based 3D reconstruction by camera setup first,
+            then by reconstruction methodology and output type. This makes it easier
+            to compare older geometric pipelines with recent neural rendering systems.
+          </p>
+        </div>
+
+        <figure class="large-figure">
+          <img src="assets/figures/Categorisation.png" alt="Categorisation of methods in the survey">
+          <figcaption>Method categorisation used throughout the survey.</figcaption>
+        </figure>
+
+        <div class="architecture-grid">
+          <article class="accent-cyan">
+            <h3>1. Fundamentals</h3>
+            <p>Event camera vs. frame camera, event triggering, event stream representation, and reconstruction output types.</p>
+          </article>
+          <article class="accent-red">
+            <h3>2. Stereo methods</h3>
+            <p>Geometry-based depth recovery, disparity-free optimization, unsupervised embedding, and deep stereo processing.</p>
+          </article>
+          <article class="accent-green">
+            <h3>3. Monocular methods</h3>
+            <p>Motion-prior geometry, learning-based mesh or voxel prediction, event NeRF, and monocular event 3DGS.</p>
+          </article>
+          <article class="accent-violet">
+            <h3>4. Multimodal methods</h3>
+            <p>Event streams fused with structured light, RGB-D, blurry RGB, depth, NeRF, and 3D Gaussian Splatting.</p>
+          </article>
+          <article class="accent-amber">
+            <h3>5. Datasets and metrics</h3>
+            <p>Public benchmarks, dataset visualization, geometry metrics, IoU/F-score, PSNR, SSIM, and LPIPS.</p>
+          </article>
+          <article class="accent-slate">
+            <h3>6. Research gaps</h3>
+            <p>Benchmarks, simulation, event representation, dynamic scenes, extreme settings, hardware synchronization, and scalability.</p>
+          </article>
+        </div>
+
+        <div class="figure-row">
+          <figure>
+            <img src="assets/figures/Event-vs-RGB.png" alt="Event camera compared with traditional camera">
+            <figcaption>Event camera vs. traditional frame camera.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/figures/3DReconTypes.png" alt="Event-based 3D reconstruction output types">
+            <figcaption>Representative 3D reconstruction output types.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section id="methods" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Methods</p>
+          <h2>From stereo depth maps to event-guided neural rendering</h2>
+          <p>
+            The survey tracks the field's movement from explicit event geometry and
+            depth mapping toward high-fidelity NeRF and 3D Gaussian Splatting.
+          </p>
+        </div>
+
+        <div class="method-block stereo">
+          <div class="method-copy">
+            <p class="eyebrow">Stereo event cameras</p>
+            <h3>Depth through asynchronous correspondence and geometric fusion</h3>
+            <p>
+              Stereo systems use synchronized event viewpoints to infer disparity,
+              depth, and point clouds. The survey distinguishes methods that perform
+              explicit disparity matching from approaches that bypass matching through
+              time-surface alignment, DSI fusion, or event ray density.
+            </p>
+            <ul class="compact-list">
+              <li>Geometry-based: disparity matching and correspondence-free optimization.</li>
+              <li>Learning-based: self-organizing maps and deep stereo depth networks.</li>
+              <li>Typical outputs: sparse or dense depth maps, point clouds, and voxels.</li>
+            </ul>
+          </div>
+          <figure>
+            <img src="assets/figures/Stereo.png" alt="Overview of stereo event camera methods">
+            <figcaption>Overview of stereo event-camera reconstruction methods.</figcaption>
+          </figure>
+        </div>
+
+        <div class="depth-comparison" aria-label="Stereo depth-map comparison">
+          <div class="comparison-title">
+            <h3>Stereo depth-map comparison</h3>
+            <p>Scenes and outputs adapted from the depth-map comparison figure in the survey.</p>
+          </div>
+          <div class="comparison-grid">
+            <span>Scene</span>
+            <span>SGM</span>
+            <span>GTS</span>
+            <span>ESVO</span>
+            <span>Ghosh et al.</span>
+            <img src="assets/figures/depthmaps/1/Scene.png" alt="Depth comparison scene 1">
+            <img src="assets/figures/depthmaps/1/SGM.png" alt="SGM result scene 1">
+            <img src="assets/figures/depthmaps/1/GTS.png" alt="GTS result scene 1">
+            <img src="assets/figures/depthmaps/1/ESVO.png" alt="ESVO result scene 1">
+            <img src="assets/figures/depthmaps/1/1.png" alt="Ghosh et al. result scene 1">
+            <img src="assets/figures/depthmaps/2/Scene.png" alt="Depth comparison scene 2">
+            <img src="assets/figures/depthmaps/2/SGM.png" alt="SGM result scene 2">
+            <img src="assets/figures/depthmaps/2/GTS.png" alt="GTS result scene 2">
+            <img src="assets/figures/depthmaps/2/ESVO.png" alt="ESVO result scene 2">
+            <img src="assets/figures/depthmaps/2/1.png" alt="Ghosh et al. result scene 2">
+            <img src="assets/figures/depthmaps/3/Scene.png" alt="Depth comparison scene 3">
+            <img src="assets/figures/depthmaps/3/SGM.png" alt="SGM result scene 3">
+            <img src="assets/figures/depthmaps/3/GTS.png" alt="GTS result scene 3">
+            <img src="assets/figures/depthmaps/3/ESVO.png" alt="ESVO result scene 3">
+            <img src="assets/figures/depthmaps/3/1.png" alt="Ghosh et al. result scene 3">
+            <img src="assets/figures/depthmaps/4/Scene.png" alt="Depth comparison scene 4">
+            <img src="assets/figures/depthmaps/4/SGM.png" alt="SGM result scene 4">
+            <img src="assets/figures/depthmaps/4/GTS.png" alt="GTS result scene 4">
+            <img src="assets/figures/depthmaps/4/ESVO.png" alt="ESVO result scene 4">
+            <img src="assets/figures/depthmaps/4/1.png" alt="Ghosh et al. result scene 4">
+          </div>
+        </div>
+
+        <div class="method-block monocular">
+          <div class="method-copy">
+            <p class="eyebrow">Monocular event cameras</p>
+            <h3>Lightweight sensing with stronger priors or learned representations</h3>
+            <p>
+              Monocular event cameras remove the stereo baseline, so reconstruction
+              depends on motion, temporal consistency, learned shape priors, or
+              differentiable event rendering. The survey separates traditional 3D
+              outputs from NeRF and 3DGS methods.
+            </p>
+            <ul class="compact-list">
+              <li>Traditional outputs: depth maps, meshes, voxels, and point clouds.</li>
+              <li>NeRF: brightness difference and brightness change-rate modelling.</li>
+              <li>3DGS: image guidance, geometric optimization, and end-to-end learning.</li>
+            </ul>
+          </div>
+          <div class="stacked-figures">
+            <figure>
+              <img src="assets/figures/Monocular1.png" alt="Monocular event methods with traditional outputs">
+              <figcaption>Monocular methods with traditional outputs.</figcaption>
+            </figure>
+            <figure>
+              <img src="assets/figures/Monocular2.png" alt="Monocular event NeRF methods">
+              <figcaption>Monocular NeRF-based methods.</figcaption>
+            </figure>
+            <figure>
+              <img src="assets/figures/Monocular3.png" alt="Monocular event 3DGS methods">
+              <figcaption>Monocular 3DGS-based methods.</figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <figure class="large-figure">
+          <img src="assets/figures/N8.png" alt="Visual comparison of monocular event NeRF methods">
+          <figcaption>Visual comparison of monocular event NeRF methods.</figcaption>
+        </figure>
+
+        <div class="method-block multimodal">
+          <div class="method-copy">
+            <p class="eyebrow">Multimodal event systems</p>
+            <h3>Events as temporal anchors for RGB, RGB-D, depth, and structured light</h3>
+            <p>
+              Multimodal pipelines use events to compensate for motion blur, low
+              light, and fast dynamics while other sensors supply appearance, depth,
+              or absolute scale. Recent work increasingly integrates event streams
+              with NeRF and 3DGS for photorealistic reconstruction.
+            </p>
+            <ul class="compact-list">
+              <li>Traditional outputs: structured-light and RGB-D fusion.</li>
+              <li>NeRF: static and dynamic scene reconstruction with blurry RGB and events.</li>
+              <li>3DGS: static deblurring and dynamic deformable Gaussian models.</li>
+            </ul>
+          </div>
+          <div class="stacked-figures">
+            <figure>
+              <img src="assets/figures/Multimodal1.png" alt="Multimodal event methods with traditional outputs">
+              <figcaption>Multimodal methods with traditional outputs.</figcaption>
+            </figure>
+            <figure>
+              <img src="assets/figures/Multimodal2.png" alt="Multimodal event NeRF methods">
+              <figcaption>Multimodal NeRF-based methods.</figcaption>
+            </figure>
+            <figure>
+              <img src="assets/figures/Multimodal3.png" alt="Multimodal event 3DGS methods">
+              <figcaption>Multimodal 3DGS-based methods.</figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <figure class="large-figure">
+          <img src="assets/figures/G1.png" alt="Multimodal 3D Gaussian reconstruction with blurry RGB and event data">
+          <figcaption>Event-assisted multimodal 3D Gaussian reconstruction.</figcaption>
+        </figure>
+      </section>
+
+      <section id="datasets" class="section band">
+        <div class="section-heading">
+          <p class="eyebrow">Datasets</p>
+          <h2>Public event-based 3D reconstruction resources remain limited</h2>
+          <p>
+            The survey groups datasets into outdoor navigation, indoor object and
+            human reconstruction, synthetic datasets, and photometric benchmarks.
+            Many current methods still rely on private captures or simulated events,
+            making standard benchmarks a major need for the field.
+          </p>
+        </div>
+
+        <div class="dataset-table">
+          <article>
+            <h3>DSEC</h3>
+            <div class="dataset-images">
+              <img src="assets/datasets/dsec/dsec_sensor.png" alt="DSEC sensors">
+              <img src="assets/datasets/dsec/dsec_frame.png" alt="DSEC frame">
+              <img src="assets/datasets/dsec/dsec_event.png" alt="DSEC event frame">
+              <img src="assets/datasets/dsec/dsec_label.png" alt="DSEC label">
+            </div>
+          </article>
+          <article>
+            <h3>MVSEC</h3>
+            <div class="dataset-images">
+              <img src="assets/datasets/mvsec/mvsec_sensor.png" alt="MVSEC sensors">
+              <img src="assets/datasets/mvsec/mvsec_frame.png" alt="MVSEC frame">
+              <img src="assets/datasets/mvsec/mvsec_event.png" alt="MVSEC event frame">
+              <img src="assets/datasets/mvsec/mvsec_label.png" alt="MVSEC label">
+            </div>
+          </article>
+          <article>
+            <h3>TUM-VIE</h3>
+            <div class="dataset-images">
+              <img src="assets/datasets/tum-vie/tum-vie_sensor.png" alt="TUM-VIE sensors">
+              <img src="assets/datasets/tum-vie/tum-vie_frame.png" alt="TUM-VIE frame">
+              <img src="assets/datasets/tum-vie/tum-vie_event.png" alt="TUM-VIE event frame">
+              <img src="assets/datasets/tum-vie/IMU.jpg" alt="TUM-VIE IMU label">
+            </div>
+          </article>
+          <article>
+            <h3>ViViD++</h3>
+            <div class="dataset-images">
+              <img src="assets/datasets/vivid/vivid_sensor.png" alt="ViViD++ sensors">
+              <img src="assets/datasets/vivid/vivid_frame.png" alt="ViViD++ frame">
+              <img src="assets/datasets/vivid/vivid_event.png" alt="ViViD++ event frame">
+              <img src="assets/datasets/vivid/vivid_label.png" alt="ViViD++ label">
+            </div>
+          </article>
+          <article>
+            <h3>EVIMO-2</h3>
+            <div class="dataset-images">
+              <img src="assets/datasets/evimo2/evimo2_sensor.jpg" alt="EVIMO-2 sensors">
+              <img src="assets/datasets/evimo2/evimo2_frame.png" alt="EVIMO-2 frame">
+              <img src="assets/datasets/evimo2/evimo2_event.png" alt="EVIMO-2 event frame">
+              <img src="assets/datasets/evimo2/evimo2_label.png" alt="EVIMO-2 label">
+            </div>
+          </article>
+          <article>
+            <h3>SynthEVox3D</h3>
+            <div class="dataset-images">
+              <img src="assets/datasets/Blender.png" alt="Synthetic dataset rendered in Blender">
+              <img src="assets/datasets/synthevox3d/synthevox3d_frame.png" alt="SynthEVox3D frame">
+              <img src="assets/datasets/synthevox3d/synthevox3d_event.png" alt="SynthEVox3D event frame">
+              <img src="assets/datasets/synthevox3d/synthevox3d_label.png" alt="SynthEVox3D label">
+            </div>
+          </article>
+          <article>
+            <h3>EventScape</h3>
+            <div class="dataset-images">
+              <img src="assets/datasets/Blender.png" alt="Synthetic dataset rendered in Blender">
+              <img src="assets/datasets/eventscape/eventscape_frame.png" alt="EventScape frame">
+              <img src="assets/datasets/eventscape/eventscape_event.png" alt="EventScape event frame">
+              <img src="assets/datasets/eventscape/eventscape_label.png" alt="EventScape label">
+            </div>
+          </article>
+          <article>
+            <h3>SEVD</h3>
+            <div class="dataset-images">
+              <img src="assets/datasets/Blender.png" alt="Synthetic dataset rendered in Blender">
+              <img src="assets/datasets/sevd/sevd_frame.png" alt="SEVD frame">
+              <img src="assets/datasets/sevd/sevd_event.png" alt="SEVD event frame">
+              <img src="assets/datasets/sevd/sevd_label.png" alt="SEVD label">
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Evaluation</p>
+          <h2>Metrics depend on the reconstruction target</h2>
+          <p>
+            Because event-based reconstruction outputs vary from explicit geometry
+            to neural rendering, the survey groups evaluation metrics by output type.
+          </p>
+        </div>
+        <div class="metrics-grid">
+          <article>
+            <h3>Geometry and depth</h3>
+            <p>Mean error, median error, relative error, RMSE, and MAE for depth maps, point clouds, and meshes.</p>
+          </article>
+          <article>
+            <h3>Voxel or shape recovery</h3>
+            <p>IoU and F-score for dense object reconstruction and volumetric occupancy.</p>
+          </article>
+          <article>
+            <h3>Neural rendering</h3>
+            <p>PSNR, SSIM, and LPIPS for novel-view synthesis and perceptual photorealism.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="gaps" class="section band">
+        <div class="section-heading">
+          <p class="eyebrow">Research gaps</p>
+          <h2>Open problems for event-driven 3D reconstruction</h2>
+          <p>
+            The paper highlights gaps across data, modelling, deployment, and sensor
+            fusion. These directions are especially important as the field moves from
+            isolated demonstrations toward reproducible and scalable systems.
+          </p>
+        </div>
+        <div class="gap-grid">
+          <article><h3>Standard benchmarks</h3><p>Large-scale real datasets, common acquisition pipelines, and public leaderboards.</p></article>
+          <article><h3>Native event simulation</h3><p>3D simulation that avoids frame-interpolation artifacts and better matches event physics.</p></article>
+          <article><h3>Event representation</h3><p>Unified comparisons, adaptive encodings, and geometry-aware event representations.</p></article>
+          <article><h3>Dynamic scenes</h3><p>Motion-aware NeRF and 3DGS models with real-time structure reconstruction.</p></article>
+          <article><h3>Extreme conditions</h3><p>Evaluation under high speed, low illumination, and high dynamic range scenarios.</p></article>
+          <article><h3>Challenging materials</h3><p>Low-texture, reflective, transparent, non-Lambertian, non-rigid, and deformable targets.</p></article>
+          <article><h3>Hardware constraints</h3><p>Resolution, timestamp precision, bandwidth, calibration, and multimodal synchronization.</p></article>
+          <article><h3>Scalability</h3><p>Efficient architectures for mobile, embedded, and large-scale reconstruction.</p></article>
+          <article><h3>New modalities</h3><p>LiDAR, polarization, IMU, event-based time-of-flight, and selective modality activation.</p></article>
+        </div>
+      </section>
+
+      <section id="cite" class="section cite-section">
+        <div class="section-heading">
+          <p class="eyebrow">Citation</p>
+          <h2>Please cite this survey</h2>
+          <p>
+            The BibTeX entry below follows the arXiv preprint citation provided for
+            this project page.
+          </p>
+        </div>
+        <pre><code>@article{xu2025survey,
+  title={A survey of 3d reconstruction with event cameras},
+  author={Xu, Chuanzhi and Zhou, Haoxian and Chen, Langyi and Chen, Haodong and Hu, Zeke Zexi and Lu, Zhicheng and Zhou, Ying and Chung, Vera and Qu, Qiang and Cai, Weidong},
+  journal={arXiv preprint arXiv:2505.08438},
+  year={2025}
+}</code></pre>
+        <div class="link-row">
+          <a href="assets/paper/citation.bib">Download citation.bib</a>
+          <a href="assets/paper/survey.pdf">Download paper PDF</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>A Survey of 3D Reconstruction with Event Cameras</p>
+      <p>Project page prepared for GitHub Pages.</p>
+    </footer>
+  </body>
+</html>
